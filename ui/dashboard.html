@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HealthPartner CRM - Admin Dashboard</title>
+    <style>
+        :root {
+            --primary: #2a52be;
+            --secondary: #f4f4f9;
+            --text: #333;
+            --accent: #00c853;
+            --warn: #ffab00;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--secondary);
+            margin: 0;
+            display: flex;
+        }
+
+        aside {
+            width: 250px;
+            background-color: var(--primary);
+            color: white;
+            height: 100vh;
+            padding: 20px;
+        }
+
+        main {
+            flex-grow: 1;
+            padding: 40px;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+
+        .card {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th,
+        td {
+            text-align: left;
+            padding: 12px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .status {
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 0.85em;
+            font-weight: bold;
+        }
+
+        .status-novo {
+            background-color: #e3f2fd;
+            color: #1565c0;
+        }
+
+        .status-interessado {
+            background-color: #e8f5e9;
+            color: #2e7d32;
+        }
+
+        .status-aguardando {
+            background-color: #fff3e0;
+            color: #ef6c00;
+        }
+
+        .btn {
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .btn-primary {
+            background-color: var(--primary);
+            color: white;
+        }
+    </style>
+</head>
+
+<body>
+    <aside>
+        <h2>HealthPartner CRM</h2>
+        <nav>
+            <p>Dashboard</p>
+            <p>Leads</p>
+            <p>Campanhas</p>
+            <p>Configurações</p>
+        </nav>
+    </aside>
+    <main>
+        <header>
+            <h1>Gestão de Leads</h1>
+            <button class="btn btn-primary">+ Novo Lead</button>
+        </header>
+
+        <div class="card">
+            <h3>Leads Recentes (Demo)</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Médico</th>
+                        <th>WhatsApp</th>
+                        <th>Especialidade</th>
+                        <th>Status</th>
+                        <th>Ações</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Dr. Ricardo Silva</td>
+                        <td>5511999999999</td>
+                        <td>Urologista</td>
+                        <td><span class="status status-novo">Novo</span></td>
+                        <td><button class="btn">Abrir</button></td>
+                    </tr>
+                    <tr>
+                        <td>Dra. Ana Costa</td>
+                        <td>5511888888888</td>
+                        <td>Urologista</td>
+                        <td><span class="status status-interessado">Interessado</span></td>
+                        <td><button class="btn">Abrir</button></td>
+                    </tr>
+                    <tr>
+                        <td>Dr. Marcos Paulo</td>
+                        <td>5511777777777</td>
+                        <td>Urologista</td>
+                        <td><span class="status status-aguardando">Aguardando Resposta</span></td>
+                        <td><button class="btn">Abrir</button></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </main>
+</body>
+
+</html>
