@@ -25,6 +25,9 @@ O sistema baseia-se exclusivamente em **dados públicos** de natureza profission
 - **NUNCA** coletar ou tratar dados sensíveis (prontuários, dados clínicos).
 - **NUNCA** coletar dados de âmbito privado (contatos pessoais fora do contexto comercial).
 
+> [!TIP]
+> Para detalhes sobre a lógica de identificação, critérios de descarte e auditoria de descoberta, consulte a [Especificação do Agent_Researcher](file:///h:/Meu%20Drive/Medicos/health-partner-crm/docs/agente_researcher.md).
+
 ---
 
 ## 3. Pipeline de Prospecção (Funil Inteligente)
