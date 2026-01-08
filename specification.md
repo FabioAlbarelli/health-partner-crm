@@ -10,6 +10,9 @@ Para garantir a eficiência e a conformidade, o sistema opera em três camadas d
 2.  **Agentes Conversacionais (IA)**: Inteligência artificial que interpreta respostas, esclarece dúvidas básicas e identifica a intenção do lead.
 3.  **Atendimento Humano (CRM)**: Atuação consultiva final, iniciada apenas após demonstração de interesse explícito.
 
+> [!NOTE]
+> Para detalhes sobre a transição para o atendimento humano, responsabilidades da equipe comercial e regras de silenciamento da automação, consulte a [Especificação do Atendimento Humano](file:///h:/Meu%20Drive/Medicos/health-partner-crm/docs/atendimento_humano.md).
+
 ---
 
 ## 2. Aquisição de Dados (Data Acquisition)
