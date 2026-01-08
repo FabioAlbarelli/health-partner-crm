@@ -70,3 +70,22 @@ O HealthPartner CRM opera sob o conceito de **Legítimo Interesse** (Art. 7º, I
 - **Direitos do Titular**: Acesso, retificação e exclusão (opt-out) facilitados e permanentes.
 - **Base de Consentimento Implícito**: Contato baseado na publicidade dos dados para fins de networking/comércio.
 - **Auditoria**: Logs completos de todas as mensagens e mudanças de status para comprovação de boas práticas.
+---
+
+## 7. Infraestrutura e Hospedagem
+
+A arquitetura do HealthPartner CRM é dividida para garantir escalabilidade, segurança e performance otimizada para cada componente.
+
+### Frontend (Interface do Usuário)
+- **Plataforma**: **Vercel**.
+- **Escopo**: Hospedagem exclusiva da interface web (Dashboard), garantindo entrega global via CDN, SSL automático e deploys atômicos.
+
+### Backend e Core de Automação
+- **Plataforma**: **Infraestrutura Dedicada Separada** (ex: AWS, Google Cloud ou Servidor VPS dedicado).
+- **Escopo**:
+    - Processamento de Regras de Negócio.
+    - Banco de Dados (SQLite/PostgreSQL).
+    - Agentes Conversacionais (IA e NLP).
+    - Integrações Críticas (WhatsApp Business API).
+    - Motores de Scraping e Data Acquisition.
+- **Justificativa**: Componentes de IA e processamento intensivo de dados exigem recursos de CPU/Memória persistentes e controle granular de ambiente que excedem o modelo serverless do frontend.
