@@ -49,6 +49,9 @@ O Agent Conversacional atua como uma recepção inteligente e transparente.
 - **Handoff Imediato**: Transfere para humano em caso de interesse explícito, pedido de falar com pessoa ou quando a dúvida foge do escopo.
 - **Limite de Interação**: Máximo de 5 turnos de conversa para evitar repetições e frustração.
 
+> [!NOTE]
+> Para detalhes técnicos de estados, classificação de intenção e regras de handoff, consulte a [Especificação Detalhada dos Agentes](file:///h:/Meu%20Drive/Medicos/health-partner-crm/docs/especificacao_agentes.md).
+
 ---
 
 ## 5. Automação de WhatsApp Business API
