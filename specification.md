@@ -1,184 +1,72 @@
-# MedConnect WhatsApp Prospecting System: Technical Specification
+# HealthPartner CRM: Especificação Técnica e Operacional
 
 ## 1. Visão Geral do Sistema (Overview)
 
-O **MedConnect WhatsApp Prospecting System** é uma plataforma de automação de prospecção comercial B2B voltada para o setor médico. O sistema utiliza dados públicos para identificar clientes potenciais e inicia o relacionamento através do WhatsApp Business API, utilizando agentes conversacionais inteligentes para qualificar o interesse antes de escalar para o atendimento humano.
+O **HealthPartner CRM** é uma plataforma especializada em automação de prospecção comercial B2B para o setor de saúde. O sistema identifica profissionais através de dados públicos e gerencia o primeiro contato via WhatsApp Business API, utilizando inteligência artificial para qualificação e escalonamento para atendimento humano.
 
-### Estratégia de Prospecção
-A prospecção é baseada em "Interesse Legítimo", onde contatamos profissionais que disponibilizam seus dados publicamente para fins comerciais/profissionais.
-1. **Identificação**: Coleta automatizada de dados de clínicas e médicos.
-2. **Engajamento**: Primeiro contato via WhatsApp focado em uma proposta de valor clara e transparente.
-3. **Qualificação**: IA interpreta respostas e gerencia dúvidas básicas.
-4. **Conversão**: Transferência para o CRM humano apenas quando o médico demonstra interesse explícito.
-
-### Princípios Fundamentais
-- **Eficiência**: Otimiza o tempo da equipe de vendas removendo o atrito do "cold calling" manual.
-- **Transparência**: Nunca fingir ser humano; identificação clara como sistema automatizado.
-- **Conformidade**: Foco total em LGPD e políticas anti-spam do WhatsApp.
+### Diferenciação de Níveis de Contato
+Para garantir a eficiência e a conformidade, o sistema opera em três camadas distintas:
+1.  **Contato Automatizado (Templates)**: Disparo inicial padronizado e aprovado pela Meta, focado em transparência e proposta de valor.
+2.  **Agentes Conversacionais (IA)**: Inteligência artificial que interpreta respostas, esclarece dúvidas básicas e identifica a intenção do lead.
+3.  **Atendimento Humano (CRM)**: Atuação consultiva final, iniciada apenas após demonstração de interesse explícito.
 
 ---
 
 ## 2. Aquisição de Dados (Data Acquisition)
 
-O módulo de aquisição é responsável por alimentar o pipeline com leads qualificados.
+O sistema baseia-se exclusivamente em **dados públicos** de natureza profissional.
 
-### Escopo de Dados
-- **Especialidade Alvo Inicial**: Urologistas (Configurável).
-- **Fontes**: Google Maps API, diretórios médicos públicos (ex: Doctoralia), sites de CRM (Conselho Regional de Medicina), e sites institucionais de clínicas/hospitais.
+### Escopo e Fontes
+- **Público-Alvo**: Médicos e profissionais de saúde (Espec. inicial: Urologistas).
+- **Fontes Primárias**: Google Maps (perfis comerciais), Doctoralia (perfis públicos), diretórios de CRM e sites institucionais.
+- **Campos Coletados**: Nome, Especialidade, Cidade/UF, Clínica/Entidade, WhatsApp Profissional (público), Email e URL da Fonte.
 
-### Campos de Coleta (Apenas Dados Públicos)
-| Campo | Descrição |
-| :--- | :--- |
-| **Nome Completo** | Nome do médico |
-| **Especialidade** | Classificação principal e sub-especialidades |
-| **Cidade/UF** | Localização da clínica ou consultório |
-| **Entidade** | Nome da clínica ou hospital onde atende |
-| **WhatsApp Público** | Número prioritário para contato ( extraído de listagens comerciais) |
-| **Email** | Canal secundário de contato |
-| **Fonte** | URL ou origem de onde o dado foi extraído |
-
-### Processamento de Entrada
-1. **Deduplicação**: Verificação por Nome + CRM ou Nome + WhatsApp para evitar contatos duplicados.
-2. **Normalização**: Formatação de números de telefone e nomes.
-3. **Classificação**: Todo novo registro entra com o status **"Novo"**.
+### Princípio da Não-Invasividade
+- **NUNCA** coletar ou tratar dados sensíveis (prontuários, dados clínicos).
+- **NUNCA** coletar dados de âmbito privado (contatos pessoais fora do contexto comercial).
 
 ---
 
-## 3. Pipeline de Prospecção (Hierarchy)
+## 3. Pipeline de Prospecção (Funil Inteligente)
 
-O pipeline define a jornada do lead desde a descoberta até a conversão ou descarte.
-
-### Estágios do Funil
-1. **Novo**: Lead recém-coletado, aguardando início de campanha.
-2. **WhatsApp Automático Enviado**: A primeira mensagem de outreach foi disparada.
-3. **Em Conversa com Agente**: Respondeu e a IA está processando a interação.
-4. **Respondeu**: Lead interagiu de forma geral (pode ser dúvida ou saudação).
-5. **Interessado**: Lead demonstrou interesse positivo na proposta (Gatilho para Humano).
-6. **Encaminhado para Atendente**: Conexão estabelecida com o time comercial.
-7. **Cliente**: Conversão final realizada.
-8. **Rejeitou**: Demonstrou desinteresse (Arquivado).
-9. **Opt-out**: Solicitou remoção (Blacklist permanente).
-10. **Inativo**: Sem resposta após X tentativas ou número inválido.
-
-### Regras de Transição Automática
-- `Novo` → `WhatsApp Automático Enviado`: Disparo via scheduler de campanha.
-- `Recebeu Resposta` → `Em Conversa com Agente`: Reconhecimento de entrada de mensagem.
-- `Intenção = Interesse` → `Interessado` → `Encaminhado`: Automação de handoff.
-- `Pedido de Opt-out` → `Opt-out`: Bloqueio imediato no banco de dados.
+1.  **Novo**: Lead importado, aguardando início.
+2.  **Apresentado (WhatsApp)**: Template de primeiro contato enviado de forma automatizada.
+3.  **Em Triagem (Agente)**: Lead respondeu; o Agente Conversacional está processando a interação.
+4.  **Qualificado (Interessado)**: Interesse positivo detectado; pronto para o comercial.
+5.  **Em Atendimento Humano**: Handoff realizado para o dashboard da atendente.
+6.  **Cliente**: Conversão comercial concluída.
+7.  **Descartado (Rejeitou/Inativo/Opt-out)**: Lead removido do ciclo ativo com registro de motivo.
 
 ---
 
-## 4. Agentes Conversacionais (Core do Sistema)
+## 4. Agentes Conversacionais (Core Intelligence)
 
-Os agentes são responsáveis pela interação de primeira linha, atuando como um filtro inteligente.
+O Agent Conversacional atua como uma recepção inteligente e transparente.
 
-### Funcionalidades do Agente
-- **Processamento de Linguagem Natural (NLP)**: Interpretação de respostas em texto livre para classificar a intenção (Dúvida, Interesse, Rejeição, Off-topic).
-- **Respostas Baseadas em Base de Conhecimento**: Responde a dúvidas frequentes (FAQ) sobre o serviço/produto oferecido.
-- **Identificação Transparente**: Toda conversa inicia com uma declaração clara: *"Olá, sou o assistente virtual do HealthPartner CRM..."*. No-bot-masking policy.
-- **Gestão de Turnos**: Limite máximo de 5 interações por lead para evitar "looping" ou fadiga do lead.
-
-### Regras de Handoff (Transferência para Humano)
-A transferência ocorre instantaneamente quando:
-1. O lead expressa interesse positivo (ex: "Quero saber mais", "Tenha interesse").
-2. O lead solicita falar com uma pessoa.
-3. A IA atinge o limite de confiança (não entende a pergunta após 2 tentativas).
-4. Pergunta fora do escopo comercial pré-definido.
+### Regras de Ouro da IA
+- **Transparência Total**: O agente deve se identificar como automação na primeira mensagem. Ex: "Olá, sou o assistente virtual da HealthPartner...".
+- **Foco em FAQ**: Responde apenas sobre o escopo comercial e operacional pré-definido.
+- **Handoff Imediato**: Transfere para humano em caso de interesse explícito, pedido de falar com pessoa ou quando a dúvida foge do escopo.
+- **Limite de Interação**: Máximo de 5 turnos de conversa para evitar repetições e frustração.
 
 ---
 
-## 5. Automação de WhatsApp
+## 5. Automação de WhatsApp Business API
 
-Implementação técnica focada em estabilidade e conformidade com as políticas da Meta.
+O sistema é construído sobre a API oficial para garantir perenidade e reputação.
 
-### Integração Tech
-- **Provedor**: WhatsApp Business API (via Cloud API oficial da Meta ou BSPs como Twilio/Zenvia).
-- **Message Templates**: Uso obrigatório de templates aprovados pela Meta para o primeiro contato (Marketing/Utility category).
-- **Janela de 24h**: Monitoramento rigoroso da janela de conversação para permitir mensagens de texto livre apenas após interação do lead.
-
-### Controle Anti-Ban e Reputação
-- **Volume Incremental (Warming)**: Início com 50 envios/dia, escalando gradualmente conforme a saúde do número.
-- **Randomização de Delay**: Intervalos variáveis (120s - 300s) entre disparos de "Cold messages".
-- **Opt-out Facilitado**: Inclusão de um botão ou instrução clara de STOP/SAIR em todas as mensagens iniciais.
-- **Logging Imutável**: Registro de todos os status de entrega (Sent, Delivered, Read) para fins de auditoria e métricas.
+- **Conformidade com a Meta**: Uso exclusivo de *Message Templates* para iniciar conversas.
+- **Respeito à Janela de 24h**: Interação livre permitida apenas após opt-in/resposta do lead.
+- **Mecânicas Anti-Spam**: Warming de números, intervalos aleatórios e monitoramento de taxas de bloqueio.
+- **Opt-out Imediato**: Inclusão de comando de saída em todas as abordagens iniciais.
 
 ---
 
-## 6. Contato Humano (Atendente)
+## 6. LGPD e Ética Comercial
 
-O painel do atendente é o ponto final de conversão, onde a inteligência artificial entrega um lead "quente".
+O HealthPartner CRM opera sob o conceito de **Legítimo Interesse** (Art. 7º, IX da LGPD).
 
-### Dashboard da Atendente
-- **Lista de Prioridades**: Leads classificados como "Interessados" aparecem no topo com alerta visual.
-- **Contexto Completo**: Visualização do histórico da conversa tida com o bot antes de assumir.
-- **Ações Rápidas**: Botões para enviar propostas PDF, agendar reuniões ou marcar como "Cliente".
-- **Handoff Reverso**: Possibilidade de devolver o lead para o bot (ex: "Lead pediu para ser contatado em 1 mês").
-
----
-
-## 7. Campanhas e Mala Direta
-
-O sistema permite a execução de disparos segmentados por WhatsApp.
-
-### Segmentação
-- **Por Especialidade**: Ex: Campanha específica para Urologistas de São Paulo.
-- **Por Status**: Ex: Re-engajamento de leads que "Responderam" mas não avançaram.
-- **Por Região**: Filtro geográfico para eventos ou promoções locais.
-
-### Métricas de Campanha
-- Taxa de Entrega.
-- Taxa de Leitura (Read Receipt).
-- Taxa de Resposta.
-- Taxa de Conversão para Humano.
-
----
-
-## 8. Regras de Negócio
-
-Garantem a integridade e a ética da operação.
-
-- **Histórico Imutável**: Nenhuma interação pode ser excluída, apenas arquivada (Auditoria).
-- **Controle de Tentativas**: Máximo de 3 tentativas de contato inicial em horários diferentes antes de marcar como "Inativo".
-- **Cooldown**: Intervalo mínimo de 90 dias entre campanhas para o mesmo lead, a menos que haja interação.
-- **Blacklist Permanente**: Leads em status "Opt-out" nunca podem ser re-importados ou contatados.
-
----
-
-## 9. LGPD e Conformidade
-
-O sistema é desenhado sob o conceito de *Privacy by Design*.
-
-- **Base Legal**: Artigo 7º, IX da LGPD (Legítimo Interesse do Controlador).
-- **Direito de Opposição**: O lead pode interromper o contato a qualquer momento com o comando "Sair" ou "Não tenho interesse".
-- **Transparência**: A primeira mensagem deve conter a origem do dado (Ex: "Encontramos seu contato publicamente no Google Maps...").
-- **Descarte de Dados**: Dados de leads inativos por mais de 24 meses são anonimizados ou excluídos.
-
----
-
-## 10. KPIs e Métricas de Sucesso
-
-| Métrica | Meta Sugerida |
-| :--- | :--- |
-| **Taxa de Resposta (WhatsApp)** | > 15% |
-| **Conversão Agente → Humano** | > 5% do total de enviados |
-| **Eficiência da Automação** | Redução de 80% no tempo de triagem manual |
-| **Taxa de Opt-out** | < 2% |
-
----
-
-## 11. Roadmap de Implementação
-
-### Versão 1: MVP Útil
-- CRM Básico para gestão de leads.
-- Disparo manual/semi-automático via WhatsApp Web.
-- Importação de listas CSV de Urologistas.
-
-### Versão 2: Automação Escalável
-- Integração com WhatsApp Business API (Cloud API).
-- Pipeline automático com transições de status.
-- Painel prioritário para atendente.
-
-### Versão 3: Inteligência Avançada
-- IA Conversacional (LLM) para triagem de respostas.
-- Dashboard de métricas avançado.
-- Motor de scraping integrado e recorrente.
+- **Finalidade**: Exclusivamente comercial e profissional.
+- **Direitos do Titular**: Acesso, retificação e exclusão (opt-out) facilitados e permanentes.
+- **Base de Consentimento Implícito**: Contato baseado na publicidade dos dados para fins de networking/comércio.
+- **Auditoria**: Logs completos de todas as mensagens e mudanças de status para comprovação de boas práticas.
