@@ -53,7 +53,7 @@ O Agent Conversacional atua como uma recepção inteligente e transparente.
 - **Limite de Interação**: Máximo de 5 turnos de conversa para evitar repetições e frustração.
 
 > [!NOTE]
-> Para detalhes técnicos de estados, classificação de intenção e regras de handoff, consulte a [Especificação Detalhada dos Agentes](file:///h:/Meu%20Drive/Medicos/health-partner-crm/docs/especificacao_agentes.md).
+> Para detalhes técnicos de estados, classificação de intenção e regras de handoff, consulte a [Especificação do Agent_Qualifier](file:///h:/Meu%20Drive/Medicos/health-partner-crm/docs/agente_qualifier.md) e a [Especificação Geral de Agentes](file:///h:/Meu%20Drive/Medicos/health-partner-crm/docs/especificacao_agentes.md).
 
 ---
 
