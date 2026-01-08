@@ -1,33 +1,74 @@
-# Guia de Mensagens Permitidas: HealthPartner CRM
+# Guia de Mensagens Institucionais: HealthPartner CRM
 
-## 1. Princípios de Comunicação
-- **Profissionalismo**: Linguagem técnica e respeitosa.
-- **Neutralidade**: Evitar tons excessivamente entusiasmados ou agressivos.
-- **Útil**: Focar na dor do médico e na solução proposta.
+## 1. Introdução
+Este guia define os padrões e templates obrigatórios para o primeiro contato automatizado via WhatsApp com profissionais de saúde. O objetivo único deste contato é abrir um canal de comunicação profissional e identificar interesse para futura interação humana, respeitando a privacidade e a ética da classe médica.
 
-## 2. Tom de Voz
-O tom deve ser o de um **Consultor Técnico**. Sério, mas acessível.
+## 2. Categorias de Mensagens Permitidas
 
-## 3. Tipos de Mensagens Permitidas
-- **Apresentação**: Mensagem inicial via template aprovado.
-- **Informativa**: Respostas a dúvidas sobre funcionalidades ou benefícios.
-- **Agendamento**: Sugestão de horários para demonstração.
-- **FAQ**: Respostas curtas e precisas para dúvidas frequentes.
+### CATEGORIA 1 — PRIMEIRO CONTATO PADRÃO
+**Texto da Mensagem:**
+"Olá, Dr(a). {NOME}.
 
-## 4. Conteúdo Proibido
-- **Falsas Promessas**: "Ganhe fortuna em 3 dias".
-- **Clickbaits**: Títulos enganosos na primeira mensagem.
-- **Excesso de Urgência**: "ÚLTIMA CHANCE, RESPONDA AGORA".
-- **Comparações Depreciativas**: Falar mal de concorrentes ou da situação atual do médico de forma ofensiva.
+Meu nome é {NOME_ATENDENTE} e faço parte de uma iniciativa voltada a parcerias institucionais na área da saúde.
 
-## 5. Estrutura da Primeira Mensagem (Conceitual)
-1. **Saudação**: Personalizada com o nome do médico.
-2. **Contexto**: Explicar a origem do contato (Dados públicos).
-3. **Valor**: O que a HealthPartner pode fazer pelo trabalho dele.
-4. **Respeito**: Opção clara de não receber mais mensagens.
-5. **CTA Suave**: "Faz sentido conversarmos sobre isso?".
+Estamos entrando em contato apenas para verificar se o(a) senhor(a) tem interesse em receber informações profissionais em algum momento futuro.
 
-## 6. Exemplos de CTAs Recomendados
-- "Gostaria de conhecer um pouco mais sobre esse fluxo?"
-- "Podemos agendar uma breve conversa de 5 minutos?"
-- "Qual seria o melhor horário para você tirar uma dúvida específica?"
+Caso prefira não receber este tipo de contato, é só nos avisar."
+
+- **Intenção:** Abrir canal profissional sem pressão comercial.
+- **Uso:** Contato padrão para novos leads qualificados.
+
+### CATEGORIA 2 — PRIMEIRO CONTATO CONSERVADOR
+**Texto da Mensagem:**
+"Olá, Dr(a). {NOME}.
+
+Este é um contato institucional e pontual.
+Gostaríamos apenas de confirmar se podemos encaminhar informações profissionais futuramente.
+
+Se preferir não receber mensagens, basta nos informar."
+
+- **Intenção:** Verificar abertura para contato com o mínimo de intrusão possível.
+- **Uso:** Recomendado para especialidades sensíveis ou leads de risco médio.
+
+### CATEGORIA 3 — PRIMEIRO CONTATO COM CONTEXTO DE ESPECIALIDADE
+**Texto da Mensagem:**
+"Olá, Dr(a). {NOME}.
+
+Estamos realizando um mapeamento institucional com profissionais da área de {ESPECIALIDADE}.
+O objetivo é apenas identificar possíveis interesses em informações profissionais futuras.
+
+Fique à vontade para nos informar caso prefira não receber contato."
+
+- **Intenção:** Contextualizar o contato através da área de atuação do profissional.
+- **Uso:** Utilizar apenas quando a especialidade for confirmada em fontes públicas confiáveis.
+
+---
+
+## 3. Classificação de Respostas (Agent_Qualifier)
+
+O `Agent_Qualifier` deve processar a resposta do destinatário e aplicar as seguintes classificações:
+
+| Resposta do Médico (Exemplos) | Status Atribuído | Próxima Ação |
+| :--- | :--- | :--- |
+| "Sim", "Ok", "Pode enviar", "Tenho interesse", "Com certeza" | **interessado** | Handoff Humano Imediato |
+| "Talvez", "Agora não", "No momento não", "O que seria?" | **neutro** | Arquivamento para re-engajamento futuro |
+| "Não", "Não quero", "Pare", "Remova", "Não me mande nada" | **rejeitou** | Blacklist Permanente (Opt-out) |
+| (Sem resposta após o período definido) | **sem_resposta** | Encerramento Silencioso |
+
+---
+
+## 4. Comportamentos Proibidos (Tolerância Zero)
+
+Para evitar a caracterização de spam e proteger a reputação do sistema, as seguintes ações são estritamente proibidas:
+
+- **Follow-up Automático:** É proibido enviar uma segunda mensagem automática caso não haja resposta.
+- **Argumentação ou Persuasão:** O sistema não deve tentar convencer o médico ou rebater recusas.
+- **Linguagem Comercial:** Proibido mencionar preços, contratos, vendas ou propostas financeiras.
+- **Elementos Informais:** Proibido o uso de emojis, gírias ou linguagem coloquial.
+- **Conteúdo Externo:** Proibido o envio de links, anexos, áudios, vídeos ou PDFs no primeiro contato.
+- **Menção a Sistemas:** Nunca mencionar que o contato é realizado por "robôs", "IA" ou "automação".
+
+## 5. Princípios de Execução
+1. **Linguagem Humana:** As mensagens devem ser curtas e diretas, simulando a cortesia de um contato institucional real.
+2. **Prioridade Humana:** Identificado o interesse, qualquer interação subsequente deve ser obrigatoriamente humana.
+3. **Mecânica de Saída:** O encerramento do contato (Opt-out) deve ser processado de forma instantânea no banco de dados.
