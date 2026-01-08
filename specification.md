@@ -66,6 +66,9 @@ O sistema é construído sobre a API oficial para garantir perenidade e reputaç
 - **Mecânicas Anti-Spam**: Warming de números, intervalos aleatórios e monitoramento de taxas de bloqueio.
 - **Opt-out Imediato**: Inclusão de comando de saída em todas as abordagens iniciais.
 
+> [!IMPORTANT]
+> O envio da mensagem inicial obedece a regras rigorosas para evitar spam e garantir a reputação do número. Para detalhes técnicos de ativação e templates, consulte a [Especificação do Agent_Contact_WhatsApp](file:///h:/Meu%20Drive/Medicos/health-partner-crm/docs/agente_whatsapp.md).
+
 ---
 
 ## 6. LGPD e Ética Comercial
