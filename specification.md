@@ -26,7 +26,7 @@ O sistema baseia-se exclusivamente em **dados públicos** de natureza profission
 - **NUNCA** coletar dados de âmbito privado (contatos pessoais fora do contexto comercial).
 
 > [!TIP]
-> Para detalhes sobre a lógica de identificação, critérios de descarte e auditoria de descoberta, consulte a [Especificação do Agent_Researcher](file:///h:/Meu%20Drive/Medicos/health-partner-crm/docs/agente_researcher.md).
+> Para detalhes sobre a lógica de identificação, critérios de descarte e auditoria de descoberta, consulte a [Especificação do Agent_Researcher](file:///h:/Meu%20Drive/Medicos/health-partner-crm/docs/agente_researcher.md). Para regras de validação e enriquecimento de dados, consulte a [Especificação do Agent_Enricher](file:///h:/Meu%20Drive/Medicos/health-partner-crm/docs/agente_enricher.md).
 
 ---
 
